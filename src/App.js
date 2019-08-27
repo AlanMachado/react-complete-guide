@@ -9,7 +9,8 @@ class App extends Component {
       { name: 'William', age: 26 },
       { name: 'Uana', age: 22 }
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
   };
 
   switchNameHandler = (newName) => {
@@ -34,6 +35,11 @@ class App extends Component {
     });
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -47,24 +53,30 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button style={style}  onClick={() => this.switchNameHandler('ALAN')}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          changeName={this.c}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'alan')}
-          changeName={this.nameChangeHandler}
-        >
-          My Hobbies: Racing
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        />
+        <button style={style}  onClick={this.togglePersonsHandler}>Switch Name</button>
+        {
+          this.state.showPersons ? 
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              changeName={this.c}
+            />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'alan')}
+              changeName={this.nameChangeHandler}
+            >
+              My Hobbies: Racing
+            </Person>
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            />
+          </div> 
+          : null
+        }
       </div>
     );
   }
