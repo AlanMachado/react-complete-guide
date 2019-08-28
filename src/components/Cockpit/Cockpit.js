@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './Cockpit.module.css';
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
+    // you can have as many useeffect you want 
+    useEffect( () => {
+        console.log('[Cockpit.js] useEffect');
+
+        // http request should be done here.... it is componentDidMount and componentDidUpdate combined 
+
+        
+        return () => { //equivalent to componentWillUnmount
+            console.log('[Cockpit.js] cleanup work in useEffect'); 
+        }
+    }, [props.persons]); //with this it will only execute once persons changes, to run only the first time pass an empty array
 
     const assignedClasses = [];
     let btnClass = '';
@@ -27,4 +38,4 @@ const cockpit = (props) => {
     );
 }
 
-export default cockpit;
+export default Cockpit;

@@ -4,15 +4,41 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: 'oipqowe', name: 'Alan', age: 30 },
-      { id: 'askdik', name: 'William', age: 26 },
-      { id: 'hasuds', name: 'Uana', age: 22 }
-    ],
-    otherState: 'some other value',
-    showPersons: false
-  };
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    
+    this.state = {
+      persons: [
+        { id: 'oipqowe', name: 'Alan', age: 30 },
+        { id: 'askdik', name: 'William', age: 26 },
+        { id: 'hasuds', name: 'Uana', age: 22 }
+      ],
+      otherState: 'some other value',
+      showPersons: false
+    }; 
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] component did mount');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+  
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+
+  }
+  
 
   deletePersonHandler = (index) => {
     // const persons = this.state.persons.slice(); ES5 way to copy an array
@@ -40,6 +66,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render');
     let persons = null;
     let btnClass = '';
 
