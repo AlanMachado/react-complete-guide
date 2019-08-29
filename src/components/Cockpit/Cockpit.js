@@ -8,11 +8,11 @@ const Cockpit = (props) => {
 
         // http request should be done here.... it is componentDidMount and componentDidUpdate combined 
 
-        
+
         return () => { //equivalent to componentWillUnmount
             console.log('[Cockpit.js] cleanup work in useEffect'); 
         }
-    }, [props.persons]); //with this it will only execute once persons changes, to run only the first time pass an empty array
+    }, [props.personsLength]); //with this it will only execute once persons changes, to run only the first time pass an empty array
 
     const assignedClasses = [];
     let btnClass = '';
@@ -21,11 +21,11 @@ const Cockpit = (props) => {
         btnClass = classes.Black;
     }
 
-    if (props.persons.length <= 2) {
+    if (props.personsLength <= 2) {
       assignedClasses.push(classes.red);
     }
 
-    if (props.persons.length <= 1) {
+    if (props.personsLength <= 1) {
       assignedClasses.push(classes.bold)
     }
 
@@ -38,4 +38,4 @@ const Cockpit = (props) => {
     );
 }
 
-export default Cockpit;
+export default React.memo(Cockpit);
